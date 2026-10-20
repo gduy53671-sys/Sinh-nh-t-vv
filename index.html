@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#05030a">
+<title>🎂 Happy Birthday Đoàn Phan Minh Trí</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:#05030a}
+body{
+  font-family:'Quicksand',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color:#fff;overscroll-behavior:none;
+  -webkit-user-select:none;user-select:none;
+}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* ================= SCREEN BASE ================= */
+.screen{
+  position:fixed;inset:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px;text-align:center;
+  opacity:0;pointer-events:none;
+  transform:scale(.97);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.screen.active{opacity:1;pointer-events:auto;transform:scale(1)}
+
+/* ================= LOADING ================= */
+.gift{font-size:64px;filter:drop-shadow(0 0 24px rgba(255,95,162,.85));animation:bounce 1.6s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-16px) rotate(7deg)}}
+.l1-title{
+  font-size:20px;font-weight:700;margin-top:20px;letter-spacing:.5px;
+  background:linear-gradient(90deg,#ffb3d9,#ff5fa2,#a35cff,#ffb3d9);
+  background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 3s linear infinite;
+}
+@keyframes shine{to{background-position:-250% 0}}
+.l1-sub{margin-top:8px;color:#c9b8d8;font-size:13.5px;letter-spacing:.8px}
+.bar{width:min(250px,72%);height:8px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:26px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,#ff5fa2,#a35cff);
+  box-shadow:0 0 18px rgba(255,95,162,.95);
+  animation:fillbar 3.1s cubic-bezier(.4,0,.2,1) forwards}
+#loading2 .bar span{animation-duration:2.4s}
+@keyframes fillbar{to{width:100%}}
+.dots{display:flex;gap:9px;margin-top:20px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#ff5fa2;box-shadow:0 0 14px #ff5fa2;animation:dotp 1.2s infinite}
+.dots i:nth-child(2){animation-delay:.18s;background:#a35cff;box-shadow:0 0 14px #a35cff}
+.dots i:nth-child(3){animation-delay:.36s}
+@keyframes dotp{0%,100%{transform:scale(.55);opacity:.35}50%{transform:scale(1.25);opacity:1}}
+
+/* ================= FINGERPRINT ================= */
+.fp-title{font-size:12.5px;letter-spacing:4px;text-transform:uppercase;color:#9d8cb0;font-weight:600}
+.fp-name{
+  font-family:'Dancing Script',cursive;font-size:36px;margin-top:4px;line-height:1.2;
+  background:linear-gradient(90deg,#ffb3d9,#ff5fa2,#a35cff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 16px rgba(255,95,162,.5));
+}
+.fp-hint{margin-top:14px;font-size:13.5px;color:#b9a9c9;height:20px;transition:color .3s}
+.fp-wrap{
+  position:relative;width:132px;height:172px;margin-top:26px;
+  cursor:pointer;touch-action:none;transition:transform .25s;
+}
+.fp-wrap:active{transform:scale(.955)}
+.fp-halo{
+  position:absolute;inset:-38px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,95,162,.25),transparent 66%);
+  animation:halo 2.6s ease-in-out infinite;pointer-events:none;
+}
+@keyframes halo{0%,100%{transform:scale(.88);opacity:.45}50%{transform:scale(1.12);opacity:1}}
+.fp{position:absolute;inset:0;width:100%;height:100%}
+.fp-base{color:rgba(255,255,255,.16);transition:color .4s}
+.fp-fill{
+  color:#ff6fb0;
+  filter:drop-shadow(0 0 5px rgba(255,95,162,.95)) drop-shadow(0 0 20px rgba(255,95,162,.65));
+  clip-path:inset(100% 0 0 0);
+}
+.fp-wrap.verified .fp-base{color:rgba(255,95,162,.4)}
+.fp-pct{margin-top:10px;font-size:15px;font-weight:700;letter-spacing:1.5px;color:#ffb3d9;text-shadow:0 0 14px rgba(255,95,162,.8)}
+
+/* ================= HEART SCENE ================= */
+#heartCv{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.cake-wrap{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);z-index:3}
+.cake{position:relative;width:132px;height:132px;animation:cakeFloat 3.4s ease-in-out infinite}
+@keyframes cakeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.cake .plate{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:132px;height:11px;border-radius:50%;
+  background:linear-gradient(#ffd6e8,#ff8fbe);
+  box-shadow:0 0 22px rgba(255,110,170,.9);
+}
+.cake .tier{
+  position:absolute;left:50%;transform:translateX(-50%);
+  border-radius:7px 7px 10px 10px;
+}
+.cake .tier-bottom{width:104px;height:44px;bottom:6px;
+  background:linear-gradient(180deg,#ffb3d1,#ff4f97);
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.12),0 0 18px rgba(255,95,162,.55)}
+.cake .tier-top{width:78px;height:32px;bottom:46px;
+  background:linear-gradient(180deg,#ffd0e2,#ff8ab8);
+  box-shadow:inset 0 -5px 0 rgba(0,0,0,.08),0 0 18px rgba(255,95,162,.45)}
+.cake .tier-top::before{
+  content:'';position:absolute;top:-6px;left:0;right:0;height:12px;border-radius:50%;
+  background:radial-gradient(circle at 30% 50%,#fff,#ffe6f2);opacity:.95;
+}
+.cake .candles{
+  position:absolute;bottom:76px;left:50%;transform:translateX(-50%);
+  display:flex;gap:17px;align-items:flex-end;
+}
+.cake .candle{
+  position:relative;width:7px;height:24px;border-radius:3px;
+  background:linear-gradient(#fff,#ffd1e6);
+  box-shadow:0 0 8px rgba(255,255,255,.6);
+}
+.cake .flame{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  width:9px;height:13px;
+  border-radius:50% 50% 50% 50% / 66% 66% 34% 34%;
+  background:radial-gradient(circle at 50% 72%,#fff 0%,#ffd35c 42%,#ff6a00 88%);
+  box-shadow:0 0 12px #ffb347,0 0 26px #ff7b00;
+  animation:flicker .34s infinite alternate;
+}
+.cake .flame::after{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,180,60,.45),transparent 70%);
+}
+@keyframes flicker{
+  0%{transform:translateX(-50%) scale(1) rotate(-3deg);opacity:.92}
+  100%{transform:translateX(-50%) scale(1.16,.9) rotate(3deg);opacity:1}
+}
+
+.heart-text{position:absolute;top:63%;left:0;right:0;padding:0 22px;text-align:center;z-index:3}
+.heart-title{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:#ffb3d9;font-weight:600}
+.heart-name{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(30px,9vw,46px);line-height:1.15;margin-top:4px;
+  background:linear-gradient(90deg,#fff,#ffb3d9,#ff5fa2);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 18px rgba(255,95,162,.55));
+}
+.heart-date{margin-top:6px;font-size:14px;letter-spacing:4px;color:#e6a9c8;font-weight:700}
+
+/* ================= BUTTON ================= */
+.btn{
+  margin-top:20px;padding:14px 30px;border:none;border-radius:99px;
+  font-family:inherit;font-size:15px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,#ff5fa2,#a35cff);
+  box-shadow:0 8px 26px rgba(255,95,162,.4),inset 0 0 0 1px rgba(255,255,255,.28);
+  cursor:pointer;animation:pulseBtn 2.2s ease-in-out infinite;
+  transition:transform .18s;
+}
+.btn:active{transform:scale(.94)}
+@keyframes pulseBtn{
+  0%,100%{box-shadow:0 8px 26px rgba(255,95,162,.35),inset 0 0 0 1px rgba(255,255,255,.25)}
+  50%{box-shadow:0 8px 42px rgba(255,95,162,.9),inset 0 0 0 1px rgba(255,255,255,.4)}
+}
+
+/* ================= ENVELOPE ================= */
+.env-top{font-size:13.5px;color:#c9b8d8;letter-spacing:1.5px;margin-bottom:30px}
+.envelope{
+  position:relative;width:min(262px,74vw);aspect-ratio:3/2;
+  cursor:pointer;perspective:900px;
+  filter:drop-shadow(0 20px 44px rgba(255,95,162,.45));
+  transition:transform .3s;
+}
+.envelope:active{transform:scale(.965)}
+.env-body{position:absolute;inset:0;border-radius:12px;
+  background:linear-gradient(160deg,#ff8ab8,#ff4f97);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.28)}
+.env-letter{
+  position:absolute;left:7%;right:7%;top:9%;height:82%;
+  background:linear-gradient(180deg,#fff8fc,#ffe9f4);
+  border-radius:8px;z-index:2;
+  display:flex;align-items:center;justify-content:center;font-size:32px;
+  transition:transform .85s cubic-bezier(.2,.9,.3,1.2) .3s;
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+.envelope.open .env-letter{transform:translateY(-62%) scale(1.03)}
+.env-flap{
+  position:absolute;top:0;left:0;width:100%;height:64%;z-index:3;
+  background:linear-gradient(180deg,#ffb0d2,#ff6aa8);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  border-radius:12px 12px 0 0;
+  transform-origin:top center;
+  transition:transform .75s cubic-bezier(.55,-.2,.4,1.3);
+}
+.envelope.open .env-flap{transform:rotateX(-180deg)}
+.env-seal{
+  position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);
+  font-size:34px;z-index:4;
+  filter:drop-shadow(0 0 14px rgba(255,95,162,.95));
+  transition:opacity .45s,transform .45s;
+  animation:beat 1.3s ease-in-out infinite;
+}
+@keyframes beat{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.14)}}
+.envelope.open .env-seal{opacity:0;transform:translate(-50%,-50%) scale(1.9)}
+.env-hint{margin-top:28px;font-size:13.5px;color:#b9a9c9;letter-spacing:1px;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.55}50%{opacity:1}}
+
+/* ================= LETTER ================= */
+#letter{padding:18px 16px;gap:14px}
+.letter-paper{
+  width:min(520px,100%);max-height:72vh;
+  display:flex;flex-direction:column;
+  background:linear-gradient(165deg,#fff8fc,#ffe6f2 55%,#ffd9ec);
+  border-radius:22px;padding:22px 20px 18px;
+  color:#3a2233;text-align:left;
+  box-shadow:0 26px 64px rgba(255,95,162,.38),inset 0 0 0 2px rgba(255,255,255,.55);
+  animation:paperIn .8s cubic-bezier(.2,.9,.3,1.15);
+}
+@keyframes paperIn{from{transform:translateY(34px) scale(.92);opacity:0}}
+.letter-head{
+  font-family:'Dancing Script',cursive;font-size:27px;color:#e0407f;
+  text-align:center;margin-bottom:14px;flex:0 0 auto;
+}
+.letter-body{
+  flex:1 1 auto;min-height:0;overflow-y:auto;
+  font-size:14.6px;line-height:1.78;padding-right:8px;
+  touch-action:pan-y;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:#ff8ab8 transparent;
+  -webkit-user-select:text;user-select:text;
+}
+.letter-body::-webkit-scrollbar{width:6px}
+.letter-body::-webkit-scrollbar-thumb{background:#ffa8cc;border-radius:99px}
+.letter-body::-webkit-scrollbar-track{background:transparent}
+.letter-body p{margin-bottom:13px}
+.letter-body b{color:#d63d78}
+.letter-sign{
+  margin-top:16px;text-align:right;
+  font-family:'Dancing Script',cursive;font-size:21px;color:#d63d78;
+}
+.scroll-hint{font-size:13px;color:#a997b8;letter-spacing:1px;animation:blink 2s ease-in-out infinite;transition:opacity .4s}
+.hidden-btn{display:none}
+.hidden-btn.show{display:inline-block;animation:fadeUp .6s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ================= FINAL CARD ================= */
+.final-card{
+  width:min(520px,100%);max-height:90vh;overflow-y:auto;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:26px 22px;
+  background:linear-gradient(165deg,rgba(34,10,28,.94),rgba(14,5,20,.97));
+  border:1px solid rgba(255,95,162,.35);
+  border-radius:26px;
+  box-shadow:0 0 70px rgba(255,95,162,.28),inset 0 0 40px rgba(163,92,255,.1);
+  animation:paperIn .85s cubic-bezier(.2,.9,.3,1.15);
+}
+.final-card::-webkit-scrollbar{width:5px}
+.final-card::-webkit-scrollbar-thumb{background:#ff5fa2;border-radius:99px}
+.final-emoji{font-size:52px;filter:drop-shadow(0 0 22px rgba(255,95,162,.9));animation:bounce 2s ease-in-out infinite}
+.final-title{
+  font-family:'Dancing Script',cursive;font-size:30px;line-height:1.2;
+  background:linear-gradient(90deg,#ffb3d9,#ff5fa2,#a35cff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.final-text{font-size:14.4px;line-height:1.8;color:#e8d9ee}
+.qr-note{font-size:13.5px;color:#ffb3d9;font-weight:600;margin-top:4px}
+
+/* Nút gửi mã QR thay cho mã QR */
+.qr-box{
+  display:flex;align-items:center;justify-content:center;
+  padding:16px 28px;
+  background:#fff;
+  border-radius:20px;
+  text-decoration:none;
+  font-size:15px;font-weight:700;color:#a3507a;
+  letter-spacing:.4px;text-align:center;
+  box-shadow:0 0 34px rgba(255,95,162,.65),0 0 0 3px rgba(255,95,162,.35);
+  transition:transform .25s,box-shadow .25s;
+  animation:qrPulse 2.4s ease-in-out infinite;
+  margin-top:6px;
+}
+.qr-box:active{transform:scale(.94)}
+@keyframes qrPulse{
+  0%,100%{box-shadow:0 0 26px rgba(255,95,162,.5),0 0 0 3px rgba(255,95,162,.3)}
+  50%{box-shadow:0 0 52px rgba(255,95,162,.95),0 0 0 5px rgba(255,95,162,.55)}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- ============ 1. LOADING ============ -->
+<section class="screen active" id="loading1">
+  <div class="gift">🎁</div>
+  <h1 class="l1-title">Đang chuẩn bị một bất ngờ...</h1>
+  <p class="l1-sub">Dành riêng cho Đoàn Phan Minh Trí 💖</p>
+  <div class="bar"><span></span></div>
+  <div class="dots"><i></i><i></i><i></i></div>
+</section>
+
+<!-- ============ 2. FINGERPRINT ============ -->
+<section class="screen" id="finger">
+  <p class="fp-title">Xác minh danh tính</p>
+  <p class="fp-name">Đoàn Phan Minh Trí</p>
+  <p class="fp-hint" id="fpHint">Nhấn giữ vào vân tay để xác nhận</p>
+
+  <div class="fp-wrap" id="fpWrap">
+    <div class="fp-halo"></div>
+
+    <svg class="fp fp-base" viewBox="0 0 100 130" fill="none" stroke="currentColor"
+         stroke-width="3.4" stroke-linecap="round">
+      <path d="M50 12 C72 12 88 30 88 55 C88 80 80 102 72 116"/>
+      <path d="M50 24 C66 24 78 38 78 56 C78 78 71 98 64 110"/>
+      <path d="M50 36 C60 36 68 45 68 58 C68 76 62 92 57 104"/>
+      <path d="M50 48 C55 48 58 52 58 60 C58 74 54 86 51 96"/>
+      <path d="M50 60 C52 60 52 64 51 70 C50 76 48 82 46 86"/>
+      <path d="M38 20 C22 26 12 40 12 58 C12 78 18 98 26 112"/>
+      <path d="M40 34 C30 39 22 48 22 60 C22 78 27 94 34 108"/>
+      <path d="M42 48 C36 52 32 58 32 64 C32 78 36 90 41 102"/>
+      <path d="M44 62 C41 66 40 70 41 76"/>
+    </svg>
+
+    <svg class="fp fp-fill" id="fpFill" viewBox="0 0 100 130" fill="none" stroke="currentColor"
+         stroke-width="3.4" stroke-linecap="round">
+      <path d="M50 12 C72 12 88 30 88 55 C88 80 80 102 72 116"/>
+      <path d="M50 24 C66 24 78 38 78 56 C78 78 71 98 64 110"/>
+      <path d="M50 36 C60 36 68 45 68 58 C68 76 62 92 57 104"/>
+      <path d="M50 48 C55 48 58 52 58 60 C58 74 54 86 51 96"/>
+      <path d="M50 60 C52 60 52 64 51 70 C50 76 48 82 46 86"/>
+      <path d="M38 20 C22 26 12 40 12 58 C12 78 18 98 26 112"/>
+      <path d="M40 34 C30 39 22 48 22 60 C22 78 27 94 34 108"/>
+      <path d="M42 48 C36 52 32 58 32 64 C32 78 36 90 41 102"/>
+      <path d="M44 62 C41 66 40 70 41 76"/>
+    </svg>
+  </div>
+
+  <div class="fp-pct" id="fpPct">0%</div>
+</section>
+
+<!-- ============ 3. HEART + CAKE ============ -->
+<section class="screen" id="heart">
+  <canvas id="heartCv"></canvas>
+
+  <div class="cake-wrap">
+    <div class="cake">
+      <div class="candles">
+        <div class="candle"><i class="flame"></i></div>
+        <div class="candle"><i class="flame"></i></div>
+        <div class="candle"><i class="flame"></i></div>
+      </div>
+      <div class="tier tier-top"></div>
+      <div class="tier tier-bottom"></div>
+      <div class="plate"></div>
+    </div>
+  </div>
+
+  <div class="heart-text">
+    <p class="heart-title">Chúc mừng sinh nhật</p>
+    <h1 class="heart-name">Đoàn Phan Minh Trí</h1>
+    <p class="heart-date">20 · 10</p>
+    <button class="btn" id="goInside">Vào tiếp đi Minh Trí ➜</button>
+  </div>
+</section>
+
+<!-- ============ 4. LOADING 2 ============ -->
+<section class="screen" id="loading2">
+  <div class="gift">💌</div>
+  <h1 class="l1-title">Đang mở thiệp...</h1>
+  <p class="l1-sub">Chờ một chút nhé Minh Trí</p>
+  <div class="bar"><span></span></div>
+  <div class="dots"><i></i><i></i><i></i></div>
+</section>
+
+<!-- ============ 5. ENVELOPE ============ -->
+<section class="screen" id="envelope">
+  <p class="env-top">Một món quà nhỏ dành cho cậu</p>
+  <div class="envelope" id="envBox">
+    <div class="env-body"></div>
+    <div class="env-letter">💗</div>
+    <div class="env-flap"></div>
+    <div class="env-seal">💗</div>
+  </div>
+  <p class="env-hint">Chạm để mở thiệp</p>
+</section>
+
+<!-- ============ 6. LETTER ============ -->
+<section class="screen" id="letter">
+  <div class="letter-paper">
+    <div class="letter-head">💌 Gửi Đoàn Phan Minh Trí</div>
+    <div class="letter-body" id="letterBody">
+
+      <p>Gửi <b>Minh Trí</b> thân mến,</p>
+
+      <p>Chúc mừng sinh nhật cậu! Vậy là thêm một mùa <b>20/10</b> nữa lại về — và hôm nay chính là ngày đặc biệt nhất, ngày mà thế giới này có thêm một người bạn tuyệt vời: là cậu. 🎉</p>
+
+      <p>Mình không nhớ chính xác tụi mình đã quen nhau bao lâu, chỉ nhớ rằng từ lúc có cậu, những ngày bình thường nhất cũng trở nên vui hơn một chút. Có những buổi chiều chẳng làm gì cả, chỉ ngồi nói mấy câu chuyện trên trời dưới đất, vậy mà vẫn cười đến mỏi cả miệng.</p>
+
+      <p>Cảm ơn cậu vì đã luôn là chính mình — một Minh Trí thẳng thắn, đôi lúc hơi "cứng đầu" một xíu, nhưng lúc nào cũng hết lòng với bạn bè. Cảm ơn cậu vì những lần nghe tụi mình kể lể mà không hề than phiền, vì những lần giúp đỡ mà chẳng cần ai nhớ tới.</p>
+
+      <p>Tuổi mới, mình chúc cậu:</p>
+      <p>🌸 Luôn mạnh khoẻ, ăn ngon, ngủ đủ và cười thật nhiều.<br>
+         🌟 Học tập và làm việc thuận lợi, gặp được nhiều điều may mắn.<br>
+         💖 Gặp được những người thật lòng thương mình.<br>
+         ✨ Và quan trọng nhất: luôn giữ được nụ cười rất riêng đó.</p>
+
+      <p>Nếu một ngày nào đó cậu thấy mệt mỏi, hãy nhớ rằng cậu không phải đi một mình. Tụi mình — những người bạn này — vẫn luôn ở đây, sẵn sàng nghe cậu nói, sẵn sàng cùng cậu đi tiếp.</p>
+
+      <p>Một lần nữa, <b>chúc mừng sinh nhật Đoàn Phan Minh Trí!</b> Mong rằng tuổi mới sẽ mang đến cho cậu thật nhiều niềm vui và những điều đẹp đẽ nhất. 🎂🎈</p>
+
+      <div class="letter-sign">— Từ những người bạn luôn ở bên cậu 💫</div>
+    </div>
+  </div>
+
+  <p class="scroll-hint" id="scrollHint">Cuộn xuống để đọc hết thư ↓</p>
+  <button class="btn hidden-btn" id="toFinal">Mở thiệp cuối cùng 💝</button>
+</section>
+
+<!-- ============ 7. FINAL ============ -->
+<section class="screen" id="final">
+  <div class="final-card">
+    <div class="final-emoji">🎂</div>
+    <h2 class="final-title">Lời chúc cuối cùng</h2>
+    <p class="final-text">
+      Chúc Minh Trí một tuổi mới thật rực rỡ — như những chấm sáng hồng kia, dù nhỏ bé nhưng luôn toả sáng theo cách riêng của mình. 🌷<br><br>
+      Hãy luôn vui vẻ, luôn là chính mình và đừng quên rằng có những người bạn luôn nhớ tới cậu trong ngày đặc biệt này.
+    </p>
+    <p class="qr-note">Hãy gửi mã QR tài khoản của bạn cho tôi nhé!</p>
+
+    <!-- Đã xóa mã QR, thay bằng nút chữ -->
+    <a class="qr-box" id="qrBtn" href="https://www.facebook.com/share/19p1V8FnnS/" target="_blank" rel="noopener noreferrer">
+      Hãy gửi mã QR cho tui qua đây
+    </a>
+  </div>
+</section>
+
+<script>
+/* ================= HELPERS ================= */
+const $ = id => document.getElementById(id);
+const FB_URL = 'https://www.facebook.com/share/19p1V8FnnS/';
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = $(id);
+  if(el) el.classList.add('active');
+}
+
+/* Tạo sprite phát sáng */
+function glowSprite(r,g,b){
+  const S = 64, c = document.createElement('canvas');
+  c.width = c.height = S;
+  const x = c.getContext('2d');
+  const gr = x.createRadialGradient(S/2,S/2,0,S/2,S/2,S/2);
+  gr.addColorStop(0,   `rgba(${r},${g},${b},1)`);
+  gr.addColorStop(0.28,`rgba(${r},${g},${b},0.6)`);
+  gr.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+  x.fillStyle = gr;
+  x.beginPath(); x.arc(S/2,S/2,S/2,0,Math.PI*2); x.fill();
+  return c;
+}
+const whiteSprite = glowSprite(255,255,255);
+const pinkSprite  = glowSprite(255,92,162);
+
+/* ================= STARFIELD ================= */
+const starCv = $('stars');
+const sctx = starCv.getContext('2d');
+let SW = 0, SH = 0, stars = [];
+
+function initStars(){
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  SW = window.innerWidth; SH = window.innerHeight;
+  starCv.width = SW*dpr; starCv.height = SH*dpr;
+  starCv.style.width = SW+'px'; starCv.style.height = SH+'px';
+  sctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const n = Math.min(190, Math.floor(SW*SH/8200));
+  stars = [];
+  for(let i=0;i<n;i++){
+    stars.push({
+      x: Math.random()*SW,
+      y: Math.random()*SH,
+      r: 0.7 + Math.random()*1.7,
+      p: Math.random()*Math.PI*2,
+      s: 0.5 + Math.random()*0.9,
+      dx: (Math.random()-0.5)*0.09,
+      dy: (Math.random()-0.5)*0.09
+    });
+  }
+}
+
+function drawStars(t){
+  sctx.clearRect(0,0,SW,SH);
+  sctx.globalCompositeOperation = 'lighter';
+  for(const s of stars){
+    s.x += s.dx; s.y += s.dy;
+    if(s.x < -12) s.x = SW + 12;
+    if(s.x > SW + 12) s.x = -12;
+    if(s.y < -12) s.y = SH + 12;
+    if(s.y > SH + 12) s.y = -12;
+
+    const a = 0.32 + 0.55*Math.abs(Math.sin(t*0.0011*s.s + s.p));
+    const size = s.r * 11;
+    sctx.globalAlpha = a;
+    sctx.drawImage(whiteSprite, s.x - size/2, s.y - size/2, size, size);
+  }
+  sctx.globalAlpha = 1;
+  requestAnimationFrame(drawStars);
+}
+
+initStars();
+requestAnimationFrame(drawStars);
+
+/* ================= HEART PARTICLES ================= */
+const hc = $('heartCv');
+const hctx = hc.getContext('2d');
+let HW = 0, HH = 0, heartParticles = [], heartRAF = null, heartAngle = 0;
+
+function buildHeart(){
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  HW = hc.clientWidth || window.innerWidth;
+  HH = hc.clientHeight || window.innerHeight;
+  hc.width = HW*dpr; hc.height = HH*dpr;
+  hctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const R = Math.min(HW*0.32, HH*0.20);
+  const k = R/17;
+  const N = Math.min(560, Math.max(260, Math.floor((HW*HH)/2600)));
+
+  const pts = [];
+  for(let i=0;i<N;i++){
+    const t = Math.random()*Math.PI*2;
+    const hx = 16*Math.pow(Math.sin(t),3);
+    const hy = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
+
+    let f = 1;
+    if(Math.random() < 0.45) f = Math.sqrt(Math.random());
+
+    pts.push({
+      x: (hx*f + (Math.random()-0.5)*0.7) * k,
+      y: (-hy*f + (Math.random()-0.5)*0.7) * k,
+      r: 1.1 + Math.random()*2.1,
+      tw: Math.random()*Math.PI*2,
+      ts: 0.018 + Math.random()*0.05
+    });
+  }
+
+  let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9;
+  for(const p of pts){
+    if(p.x<minX)minX=p.x; if(p.x>maxX)maxX=p.x;
+    if(p.y<minY)minY=p.y; if(p.y>maxY)maxY=p.y;
+  }
+  const ox = (minX+maxX)/2, oy = (minY+maxY)/2;
+  for(const p of pts){ p.x -= ox; p.y -= oy; }
+
+  heartParticles = pts;
+}
+
+function drawHeartScene(t){
+  heartRAF = requestAnimationFrame(drawHeartScene);
+  if(!$('heart').classList.contains('active')) return;
+
+  hctx.clearRect(0,0,HW,HH);
+  heartAngle += 0.0055;
+
+  const cx = HW/2;
+  const cy = HH*0.40;
+  const pulse = 1 + Math.sin(t*0.0016)*0.032;
+  const cosA = Math.cos(heartAngle), sinA = Math.sin(heartAngle);
+
+  hctx.globalCompositeOperation = 'lighter';
+
+  for(const p of heartParticles){
+    p.tw += p.ts;
+    const rx = (p.x*cosA - p.y*sinA) * pulse;
+    const ry = (p.x*sinA + p.y*cosA) * pulse;
+
+    const alpha = 0.42 + 0.58*Math.abs(Math.sin(p.tw));
+    const size = p.r * 6.4;
+
+    hctx.globalAlpha = alpha;
+    hctx.drawImage(pinkSprite, cx+rx-size/2, cy+ry-size/2, size, size);
+  }
+
+  hctx.globalAlpha = 1;
+  hctx.globalCompositeOperation = 'source-over';
+}
+
+/* ================= FLOW ================= */
+
+setTimeout(() => show('finger'), 3300);
+
+/* --- Fingerprint --- */
+const fpWrap = $('fpWrap');
+const fpFill = $('fpFill');
+const fpPct  = $('fpPct');
+const fpHint = $('fpHint');
+
+let holding = false, progress = 0, verified = false, lastT = 0, fpRAF = null;
+
+function updateFp(){
+  const p = Math.round(progress);
+  fpFill.style.clipPath = `inset(${100 - progress}% 0 0 0)`;
+  fpPct.textContent = p + '%';
+}
+
+function fpLoop(t){
+  const dt = Math.min(60, t - (lastT || t));
+  lastT = t;
+
+  if(verified){
+    progress = 100;
+  } else if(holding){
+    progress = Math.min(100, progress + dt/16);
+  } else {
+    progress = Math.max(0, progress - dt/9);
+  }
+
+  updateFp();
+
+  if(!verified && progress >= 100) onVerified();
+
+  if(!verified && (holding || progress > 0)){
+    fpRAF = requestAnimationFrame(fpLoop);
+  } else {
+    fpRAF = null;
+    lastT = 0;
+  }
+}
+
+function startHold(e){
+  if(verified) return;
+  if(e && e.preventDefault) e.preventDefault();
+  holding = true;
+  if(!fpRAF){ lastT = 0; fpRAF = requestAnimationFrame(fpLoop); }
+}
+
+function endHold(){
+  if(verified) return;
+  holding = false;
+  if(!fpRAF){ lastT = 0; fpRAF = requestAnimationFrame(fpLoop); }
+}
+
+function onVerified(){
+  verified = true;
+  holding = false;
+  progress = 100;
+  updateFp();
+  fpWrap.classList.add('verified');
+  fpHint.textContent = 'Đã xác minh ✓ Xin chào Đoàn Phan Minh Trí!';
+  fpHint.style.color = '#ff9ecb';
+  if(navigator.vibrate) navigator.vibrate([30,50,80]);
+
+  setTimeout(() => {
+    show('heart');
+    requestAnimationFrame(() => {
+      buildHeart();
+      if(!heartRAF) heartRAF = requestAnimationFrame(drawHeartScene);
+    });
+  }, 1150);
+}
+
+fpWrap.addEventListener('pointerdown', startHold);
+fpWrap.addEventListener('pointerup', endHold);
+fpWrap.addEventListener('pointerleave', endHold);
+fpWrap.addEventListener('pointercancel', endHold);
+fpWrap.addEventListener('contextmenu', e => e.preventDefault());
+
+/* --- Heart scene button --- */
+$('goInside').addEventListener('click', () => {
+  if(navigator.vibrate) navigator.vibrate(18);
+  show('loading2');
+  setTimeout(() => show('envelope'), 2600);
+});
+
+/* --- Envelope --- */
+const envBox = $('envBox');
+envBox.addEventListener('click', () => {
+  if(envBox.classList.contains('open')) return;
+  envBox.classList.add('open');
+  if(navigator.vibrate) navigator.vibrate([15,40,15]);
+
+  setTimeout(() => {
+    show('letter');
+    setTimeout(checkLetterEnd, 400);
+  }, 1250);
+});
+
+/* --- Letter scroll --- */
+const letterBody = $('letterBody');
+const scrollHint = $('scrollHint');
+const toFinal = $('toFinal');
+
+function checkLetterEnd(){
+  const atEnd = letterBody.scrollHeight - letterBody.scrollTop - letterBody.clientHeight < 40;
+  if(atEnd){
+    scrollHint.style.display = 'none';
+    toFinal.classList.add('show');
+  }
+}
+
+letterBody.addEventListener('scroll', checkLetterEnd, {passive:true});
+
+toFinal.addEventListener('click', () => {
+  show('final');
+});
+
+/* --- Resize --- */
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    initStars();
+    if($('heart').classList.contains('active')) buildHeart();
+  }, 220);
+});
+
+requestAnimationFrame(drawHeartScene);
+</script>
+</body>
+</html>
